@@ -6,4 +6,4 @@ cd ~/workspace/modules/concourse
 echo "Running \`docker-compose up\` on $(pwd)/docker-compose.yml" 
 sleep 1s
 
-sudo docker-compose up -d
+docker-compose up -d
