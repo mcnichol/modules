@@ -4,18 +4,24 @@ printf "\n\
 ####################\n\
 "
 
+change_shell(){
+    printf "Changing Default Shell to ZSH\n"
+    if [ ! -z $DEFAULT_PASSWORD ]; then
+        echo $DEFAULT_PASSWORD | chsh -s $(which zsh) > /dev/null 2>&1
+    else
+        chsh -s $(which zsh)
+    fi 
+}
+
 CHECK_ZSH_INSTALLED=$(grep /zsh$ /etc/shells | wc -l)
 if [ ! $CHECK_ZSH_INSTALLED -ge 1 ]; then
     printf "Zsh is not installed"
     sudo apt-get -y install zsh
 fi
 
-printf "Changing Default Shell to ZSH\n"
-if [ ! -z $DEFAULT_PASSWORD ]; then
-    echo $DEFAULT_PASSWORD | chsh -s $(which zsh) > /dev/null 2>&1
-else
-    chsh -s $(which zsh)
-fi 
+if [ ! -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
+    change_shell
+fi
 
 ###################
 # oh-my-zsh setup #
