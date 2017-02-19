@@ -1,7 +1,8 @@
-echo "############################"
-echo "# Running Git Setup Module #"
-echo "############################"
-sleep 1s
+printf "\n\
+####################\n\
+# Git Module Setup #\n\
+####################\n\
+"
 
 sudo apt-get -y install git \
     tig                         #Git CLI Commit Browser
@@ -10,5 +11,4 @@ sudo apt-get -y install git \
 git config --global user.name "McNichol"
 git config --global user.email mcnichol.m@gmail.com
 git config --global core.editor "vim"
-
 

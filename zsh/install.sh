@@ -1,6 +1,8 @@
-#############
-# ZSH Setup #
-#############
+printf "\n\
+####################\n\
+# Zsh Module Setup #\n\
+####################\n\
+"
 
 CHECK_ZSH_INSTALLED=$(grep /zsh$ /etc/shells | wc -l)
 if [ ! $CHECK_ZSH_INSTALLED -ge 1 ]; then

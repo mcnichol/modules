@@ -1,10 +1,15 @@
-
+printf "\n\
+####################\n\
+# SSH Module Setup #\n\
+####################\n\
+"
 
 #TODO
 # Extract as utility for other modules
 # use $PACKAGE_TO_INSTALL inside of grep
 # Issues:
 # Does not account for packages that have been installed and then uninstalled (rc)
+
 
 RESTART_REQUIRED=false
 PACKAGE_TO_INSTALL=openssh-server
@@ -29,7 +34,7 @@ if [ ! -d $DIRECTORY ]; then
     touch ~/.ssh/authorized_keys
     chmod 600 ~/.ssh/authorized_keys
 else
-    printf ".ssh directory exists, skipping local configuration\n\n"
+    printf ".ssh directory exists, skipping local configuration\n"
 fi
 
 if [ "$RESTART_REQUIRED" = true ]; then
