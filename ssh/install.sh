@@ -6,6 +6,7 @@
 # Issues:
 # Does not account for packages that have been installed and then uninstalled (rc)
 
+RESTART_REQUIRED=false
 PACKAGE_TO_INSTALL=openssh-server
 
 PACAKGE_NEVER_INSTALLED="$(dpkg-query -l $PACKAGE_TO_INSTALL > /dev/null 2>&1 | grep -Eo 'no packages found matching openssh-server')"
@@ -14,6 +15,7 @@ if [ ! -z $PACAKGE_NEVER_INSTALLED ]; then
 
     sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.default-template
     sudo chmod 666 /etc/ssh/sshd_config.default-template
+    RESTART_REQUIRED=true
 else
     printf "Package exists (or was previously installed): $PACKAGE_TO_INSTALL\n"
     printf "Please re-install package manually:\n\n \
@@ -30,5 +32,7 @@ else
     printf ".ssh directory exists, skipping local configuration\n\n"
 fi
 
-printf "Restarting SSH service\n"
-#sudo systemctl restart ssh
+if [ "$RESTART_REQUIRED" = true ]; then
+    printf "Restarting SSH service\n"
+    sudo systemctl restart ssh
+fi
