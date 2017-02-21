@@ -1,0 +1,21 @@
+db:
+    image: postgres:latest
+    hostname: pgsql-01
+    ports:
+        - 5433:5433
+    environment:
+        - POSTGRES_DB=sonar
+        - POSTGRES_USER=sonar
+        - POSTGRES_PASSWORD=sonar
+
+sonar:
+    image: sonarqube:latest
+    hostname: sonar-01
+    links:
+        - db
+    ports:
+        - 9000:9000
+    environment:
+        - SONAR_JDBC_URL=jdbc:/postgresql://pgsql-01:5433/sonar
+        - SONAR_JDBC_USERNAME=sonar
+        - SONAR_JDBC_PASSWORD=sonar
