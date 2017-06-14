@@ -37,5 +37,7 @@ if [ -d "$ZSH" ]; then
 else
     git clone --depth=1 git://github.com/robbyrussell/oh-my-zsh.git $ZSH
     cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-    sed "/^export ZSH=/ c\ ZSH=$ZSH" ~/.zshrc > ~/.zshrc-temp && mv ~/.zshrc-temp ~/.zshrc
+    sed "/^export ZSH=/ c\\
+    export ZSH=$ZSH
+" ~/.zshrc > ~/.zshrc-temp && mv ~/.zshrc-temp ~/.zshrc
 fi
