@@ -1,1 +1,4 @@
 *.swp
+bosh/bosh-deployment
+bosh/deployments
+bosh/cf-deployment
