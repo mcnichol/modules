@@ -34,6 +34,12 @@ if [ $THIS_PLATFORM == "Darwin" ]; then
       echo "Must have ruby installed to continue"
       MEETS_DEPENDENCY_REQUIREMENTS=false
    fi
+
+   program_is_installed virtualbox
+   if [[ $? == "1" ]]; then
+      echo "Must have virtualbox installed to continue"
+      MEETS_DEPENDENCY_REQUIREMENTS=false
+   fi
 fi
 
 # Ubuntu - Trusty Tar
@@ -44,9 +50,7 @@ fi
 #sudo yum install gcc gcc-c++ ruby ruby-devel mysql-devel postgresql-devel postgresql-libs sqlite-devel libxslt-devel libxml2-devel patch openssl
 #gem install yajl-ruby
 
-
-
-if [ $MEETS_DEPENDENCY_REQUIREMENTS ]; then
+if [ "$MEETS_DEPENDENCY_REQUIREMENTS" == "true" ]; then
    msgWithColor "It looks like you have everything you need to start using bosh. Have fun!\n" $BLUE
 else
    msgWithColor "Please install missing dependencies and check again\n" $RED
